@@ -1,0 +1,53 @@
+[
+  {
+    "_id": "local-1782654139827-17744039303d28",
+    "fullName": "X",
+    "email": "x@test.com",
+    "password": "p",
+    "accountId": "WSG-1",
+    "role": "user",
+    "totalGold": 0,
+    "currentValue": 0,
+    "monthlyFees": 0,
+    "lastDepositDate": null,
+    "vaultLocation": "Main Vault",
+    "notes": "",
+    "nextOfKin": "",
+    "createdAt": "2026-06-28T13:42:19.827Z",
+    "updatedAt": "2026-06-28T13:42:19.828Z"
+  },
+  {
+    "_id": "local-1782654344782-5b9b8a7c5fa6c8",
+    "fullName": "Test User",
+    "email": "testuser+dev5@local.test",
+    "password": "$2b$10$hMqMKTOxaDLgbNEg9I6ncuCKQ2rz.IpXaP4wJyfJ5z8ojNv9iLYgi",
+    "accountId": "WSG-1782654344759",
+    "role": "user",
+    "totalGold": 0,
+    "currentValue": 0,
+    "monthlyFees": 0,
+    "lastDepositDate": null,
+    "vaultLocation": "Main Vault",
+    "notes": "",
+    "nextOfKin": "",
+    "createdAt": "2026-06-28T13:45:44.782Z",
+    "updatedAt": "2026-06-28T13:45:44.783Z"
+  },
+  {
+    "_id": "local-1782655712245-30678e37bca16",
+    "fullName": "Giftyafisa",
+    "email": "giftyafisa@gmail.com",
+    "password": "$2b$10$suIvf1Gkno6mFwrwtPTrW.WyOgO11tWrRFh/WAPYq/w34VXGPggJK",
+    "accountId": "WSG-1782655712244",
+    "role": "user",
+    "totalGold": 0,
+    "currentValue": 0,
+    "monthlyFees": 0,
+    "lastDepositDate": null,
+    "vaultLocation": "Main Vault",
+    "notes": "",
+    "nextOfKin": "",
+    "createdAt": "2026-06-28T14:08:32.245Z",
+    "updatedAt": "2026-06-28T14:08:32.245Z"
+  }
+]

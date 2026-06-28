@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin Dashboard | United States Bullion Depository</title>
+  <link rel="stylesheet" href="asset/style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<div class="admin-wrapper">
+
+  <!-- SIDEBAR -->
+  <div class="admin-sidebar">
+    <h2>United States Bullion Depository<br>Admin</h2>
+
+    <a href="#" class="active" data-tab="admin-dashboard">Dashboard</a>
+    <a href="#" data-tab="admin-deposits">Deposits</a>
+    <a href="#" data-tab="admin-withdrawals">Withdrawals</a>
+    <a href="#" data-tab="admin-users">Users</a>
+    <a href="#" data-tab="admin-transactions">Transactions</a>
+    <a href="#" data-tab="admin-settings">Settings</a>
+
+    <a href="../login.html" class="logout">Logout</a>
+  </div>
+
+  <!-- MAIN CONTENT -->
+  <div class="admin-main">
+
+    <!-- DASHBOARD -->
+    <div id="admin-dashboard" class="admin-tab active">
+      <h1>Dashboard</h1>
+
+      <div class="stats">
+        <div class="stat-card">Total Customers <span id="totalCustomers">0</span></div>
+        <div class="stat-card">Gold Stored <span id="totalGoldStored">0 oz</span></div>
+        <div class="stat-card">Pending Requests <span id="pendingRequests">0</span></div>
+      </div>
+    </div>
+
+    <!-- DEPOSITS -->
+    <div id="admin-deposits" class="admin-tab">
+      <h1>Deposit Requests</h1>
+
+      <table>
+        <thead>
+          <tr>
+            <th>User</th>
+            <th>Amount</th>
+            <th>Date</th>
+            <th>Status</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody id="adminDepositsBody"></tbody>
+      </table>
+    </div>
+
+    <!-- WITHDRAWALS -->
+    <div id="admin-withdrawals" class="admin-tab">
+      <h1>Withdrawal Requests</h1>
+      <table>
+        <thead>
+          <tr>
+            <th>User</th>
+            <th>Amount</th>
+            <th>Date</th>
+            <th>Status</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody id="adminWithdrawalsBody"></tbody>
+      </table>
+    </div>
+
+    <!-- USERS -->
+    <div id="admin-users" class="admin-tab">
+      <h1>Users Management</h1>
+
+      <table>
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Next of Kin</th>
+            <th>Total Gold</th>
+            <th>Current Value</th>
+            <th>Monthly Fees</th>
+            <th>Last Deposit</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody id="adminUsersBody"></tbody>
+      </table>
+    </div>
+
+    <!-- USER EDIT MODAL -->
+    <div id="editUserModal" class="modal">
+      <div class="modal-content">
+        <span class="close" id="closeEditModal">&times;</span>
+        <h2>Edit User Gold Details</h2>
+        <form id="editUserForm" class="admin-form">
+          <input type="hidden" id="editUserId">
+          
+          <p><strong>User:</strong> <span id="editUserName"></span></p>
+          <p><strong>Email:</strong> <span id="editUserEmail"></span></p>
+          
+          <label for="editTotalGold">Total Gold (oz)</label>
+          <input type="number" id="editTotalGold" step="0.01" min="0" required>
+          
+          <label for="editCurrentValue">Current Value ($)</label>
+          <input type="number" id="editCurrentValue" step="0.01" min="0" required>
+          
+          <label for="editMonthlyFees">Monthly Fees ($)</label>
+          <input type="number" id="editMonthlyFees" step="0.01" min="0" required>
+
+          <label for="editNextOfKin">Next of Kin</label>
+          <input type="text" id="editNextOfKin" placeholder="Jane Doe">
+          
+          <label for="editLastDepositDate">Last Deposit Date</label>
+          <input type="date" id="editLastDepositDate">
+          
+          <label for="editVaultLocation">Vault Location</label>
+          <input type="text" id="editVaultLocation" placeholder="Main Vault">
+          
+          <label for="editNotes">Notes</label>
+          <textarea id="editNotes" rows="3" style="width:100%;padding:12px;border:1px solid #d1d5db;border-radius:8px;margin-bottom:16px;"></textarea>
+          
+          <button type="submit" class="btn-primary">Save Changes</button>
+        </form>
+      </div>
+    </div>
+
+    <!-- TRANSACTIONS -->
+    <div id="admin-transactions" class="admin-tab">
+      <h1>Transactions</h1>
+      <table>
+        <thead>
+          <tr>
+            <th>User</th>
+            <th>Type</th>
+            <th>Amount</th>
+            <th>Date</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody id="adminTransactionsBody"></tbody>
+      </table>
+    </div>
+
+    <!-- SETTINGS -->
+    <div id="admin-settings" class="admin-tab">
+      <h1>Admin Settings</h1>
+      
+      <div class="admin-settings-section">
+        <h3>Change Your Password</h3>
+        <form id="adminPasswordForm" class="admin-form">
+          <label for="adminCurrentPassword">Current Password</label>
+          <input type="password" id="adminCurrentPassword" required>
+          
+          <label for="adminNewPassword">New Password</label>
+          <input type="password" id="adminNewPassword" required>
+          
+          <label for="adminConfirmPassword">Confirm New Password</label>
+          <input type="password" id="adminConfirmPassword" required>
+          
+          <button type="submit" class="btn-primary">Update Password</button>
+        </form>
+      </div>
+
+      <div class="admin-settings-section" style="margin-top: 30px;">
+        <h3>Manage User Roles</h3>
+        <form id="changeRoleForm" class="admin-form">
+          <label for="roleUserEmail">User Email</label>
+          <input type="email" id="roleUserEmail" placeholder="user@example.com" required>
+          
+          <label for="roleSelect">New Role</label>
+          <select id="roleSelect" required>
+            <option value="user">User</option>
+            <option value="admin">Admin</option>
+          </select>
+          
+          <button type="submit" class="btn-primary">Update Role</button>
+        </form>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script src="asset/main.js"></script>
+</body>
+</html>

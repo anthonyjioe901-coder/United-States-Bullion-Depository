@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login | United States Bullion Depository</title>
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+
+<header class="navbar public-header">
+  <a class="logo" href="index.html">United States Bullion Depository</a>
+  <nav class="public-nav-panel" id="publicNavPanel" aria-label="Primary navigation">
+    <div class="public-nav-links">
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="security.html">Security</a>
+      <a href="pricing.html">Pricing</a>
+      <a href="contact.html">Support</a>
+    </div>
+    <div class="public-nav-actions">
+      <a href="login.html" class="btn-outline">Login</a>
+      <a href="signup.html" class="btn-primary">Create Free Account</a>
+    </div>
+  </nav>
+  <button class="public-nav-toggle" id="publicNavToggle" type="button" aria-controls="publicNavPanel" aria-expanded="false">
+    <span class="public-nav-toggle-lines" aria-hidden="true"><span></span><span></span><span></span></span>
+    <span class="public-nav-toggle-label">Menu</span>
+  </button>
+  <div class="public-nav-overlay" aria-hidden="true"></div>
+</header>
+
+<main class="auth-shell">
+  <section class="auth-intro">
+    <div>
+      <span class="section-kicker">Secure access</span>
+      <h1>Welcome back</h1>
+      <p>Sign in to securely manage your gold holdings, review vault activity, and track every deposit in one place.</p>
+    </div>
+
+    <ul class="auth-highlights">
+      <li>Live dashboard balances</li>
+      <li>Protected vault records</li>
+      <li>Transparent account activity</li>
+    </ul>
+  </section>
+
+  <section class="auth-card-panel">
+  <div class="login-card auth-card">
+    <h2>Log in to United States Bullion Depository</h2>
+    <p>Access your secure dashboard</p>
+
+   <form id="loginForm">
+
+
+      <div class="login-group">
+        <label>Email address</label>
+        <input type="email" placeholder="you@example.com" required>
+      </div>
+
+      <div class="login-group">
+        <label>Password</label>
+        <input type="password" placeholder="••••••••" required>
+      </div>
+
+      <div class="login-meta">
+        <label>
+          <input type="checkbox"> Remember me
+        </label>
+        <a href="forgot-password.html">Forgot password?</a>
+
+      </div>
+
+      <button type="submit" class="btn-primary">
+        Log in
+      </button>
+
+    </form>
+
+    <div class="login-footer">
+      Don’t have an account?
+      <a href="signup.html">Create one</a>
+    </div>
+  </div>
+</section>
+</main>
+<script src="assets/js/public-nav.js"></script>
+<script>
+document.getElementById("loginForm").addEventListener("submit", async function (e) {
+  e.preventDefault(); 
+
+  const email = document.querySelector('input[type="email"]').value;
+  const password = document.querySelector('input[type="password"]').value;
+
+  const response = await fetch("http://localhost:5000/api/auth/login", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ email, password })
+  });
+
+  const data = await response.json();
+
+  if (response.ok && data.token) {
+    localStorage.setItem("token", data.token);
+    localStorage.setItem("role", data.user?.role || "user");
+
+    if (data.user?.role === "admin") {
+      window.location.href = "admin/admin.html";
+    } else {
+      window.location.href = "dashboard.html";
+    }
+  } else {
+    alert(data.message || "Invalid login details");
+  }
+});
+</script>
+
+</body>
+</html>

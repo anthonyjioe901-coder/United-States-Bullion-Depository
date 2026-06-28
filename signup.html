@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sign Up | United States Bullion Depository</title>
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+
+<header class="navbar public-header">
+  <a class="logo" href="index.html">United States Bullion Depository</a>
+  <nav class="public-nav-panel" id="publicNavPanel" aria-label="Primary navigation">
+    <div class="public-nav-links">
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="security.html">Security</a>
+      <a href="pricing.html">Pricing</a>
+      <a href="contact.html">Support</a>
+    </div>
+    <div class="public-nav-actions">
+      <a href="login.html" class="btn-outline">Login</a>
+      <a href="signup.html" class="btn-primary">Create Free Account</a>
+    </div>
+  </nav>
+  <button class="public-nav-toggle" id="publicNavToggle" type="button" aria-controls="publicNavPanel" aria-expanded="false">
+    <span class="public-nav-toggle-lines" aria-hidden="true"><span></span><span></span><span></span></span>
+    <span class="public-nav-toggle-label">Menu</span>
+  </button>
+  <div class="public-nav-overlay" aria-hidden="true"></div>
+</header>
+
+<main class="auth-shell">
+  <section class="auth-intro">
+    <div>
+      <span class="section-kicker">New account</span>
+      <h1>Create your account</h1>
+      <p>Join United States Bullion Depository to securely manage your gold holdings with a private dashboard and clear storage records.</p>
+    </div>
+
+    <ul class="auth-highlights">
+      <li>Start with a secure profile</li>
+      <li>Track vault deposits online</li>
+      <li>Manage everything from one portal</li>
+    </ul>
+  </section>
+
+  <section class="auth-card-panel">
+  <div class="login-card auth-card">
+    <h2>Sign Up</h2>
+    <p>Enter your details to get started</p>
+
+    <form id="signupForm">
+      <div class="login-group">
+        <label>Full Name</label>
+        <input type="text" placeholder="John Doe" required>
+      </div>
+
+      <div class="login-group">
+        <label>Email address</label>
+        <input type="email" placeholder="you@example.com" required>
+      </div>
+
+      <div class="login-group">
+        <label>Password</label>
+        <input type="password" placeholder="••••••••" required>
+      </div>
+
+      <div class="login-group">
+        <label>Confirm Password</label>
+        <input type="password" placeholder="••••••••" required>
+      </div>
+
+      <button type="submit" class="btn-primary">Create Account</button>
+    </form>
+
+    <div class="login-footer">
+      Already have an account? <a href="login.html">Log in</a>
+    </div>
+  </div>
+  </section>
+</main>
+<script src="assets/js/public-nav.js"></script>
+<script>
+document.getElementById("signupForm").addEventListener("submit", async function (e) {
+  e.preventDefault(); // stop page refresh
+
+  const fullName = document.querySelector('input[type="text"]').value;
+  const email = document.querySelector('input[type="email"]').value;
+  const password = document.querySelectorAll('input[type="password"]')[0].value;
+
+  const response = await fetch("http://localhost:5000/api/auth/signup", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ fullName, email, password })
+  });
+
+  const data = await response.json();
+
+  if (response.ok) {
+    alert("Account created successfully");
+    window.location.href = "login.html";
+  } else {
+    alert(data.message || "Signup failed");
+  }
+});
+</script>
+
+</body>
+</html>
