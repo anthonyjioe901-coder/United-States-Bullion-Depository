@@ -1,0 +1,11 @@
+services:
+  - type: web
+    name: united-states-bullion-depository
+    env: node
+    plan: free
+    rootDir: wealthshield-backend
+    buildCommand: npm install
+    startCommand: npm start
+    envVars:
+      - key: NODE_ENV
+        value: production
