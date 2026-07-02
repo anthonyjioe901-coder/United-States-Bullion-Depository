@@ -89,7 +89,8 @@ document.getElementById("signupForm").addEventListener("submit", async function 
   const email = document.querySelector('input[type="email"]').value;
   const password = document.querySelectorAll('input[type="password"]')[0].value;
 
-  const response = await fetch("http://localhost:5000/api/auth/signup", {
+  const apiBase = window.location.hostname === "localhost" ? "http://localhost:5000" : "";
+  const response = await fetch(`${apiBase}/api/auth/signup`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ fullName, email, password })
